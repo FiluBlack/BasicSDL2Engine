@@ -19,11 +19,11 @@ int main(int argc, char* args[])
     SDL_SetRenderDrawBlendMode(r1, SDL_BLENDMODE_NONE);
     SDL_RenderClear(r1);
     
-    Spritesheet s1(r1, "arrow.png"), s2(r1, "arrow2.png");
+    Spritesheet s1(r1, "resources/images/arrow.png"), s2(r1, "resources/images/arrow2.png");
 
 
 
-    Spritesheet s3(Spritesheet(r1, "arrow2.png"));
+    Spritesheet s3(Spritesheet(r1, "resources/images/arrow2.png"));
     s3.log();
     s2.log();
 

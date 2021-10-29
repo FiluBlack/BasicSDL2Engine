@@ -98,7 +98,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDLEssentials;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDLGraphics\include;$(SolutionDir)SDLGraphics;$(SolutionDir)SDLEssentials\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -165,19 +165,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="lib\Image.cpp" />
+    <ClCompile Include="lib\Spritesheet.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Spritesheet.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Image.h" />
+    <ClInclude Include="include\Image.h" />
+    <ClInclude Include="include\Spritesheet.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Spritesheet.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SDLEssentials\SDLEssentials.vcxproj">

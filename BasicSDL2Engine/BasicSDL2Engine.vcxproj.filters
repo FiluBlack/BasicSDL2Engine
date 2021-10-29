@@ -36,9 +36,4 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="arrow.png">
-      <Filter>Ressourcendateien</Filter>
-    </Image>
-  </ItemGroup>
 </Project>

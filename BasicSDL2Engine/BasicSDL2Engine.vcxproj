@@ -98,7 +98,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDLGeometry;$(SolutionDir)SDLGraphics;$(SolutionDir)SDLEssentials</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDLGeometry\include;$(SolutionDir)SDLGraphics\include;$(SolutionDir)SDLEssentials\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -189,9 +189,6 @@
     <ProjectReference Include="..\SDLGraphics\SDLGraphics.vcxproj">
       <Project>{d56f3239-ec81-4854-86f2-8794c254cf8d}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="arrow.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
