@@ -8,6 +8,10 @@ template <class T>
 class Position2D;
 template <class T>
 class Size2D;
+template <class T>
+class Rect2D;
+
+class Color;
 
 
 template <class T>
