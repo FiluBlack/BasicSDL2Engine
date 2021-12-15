@@ -34,6 +34,8 @@ public:
 
 	inline SDL_Point convertToSDL_Point() { return SDL_Point{ (int)this->x, (int)this->y }; }
 	inline SDL_FPoint convertToSDL_FPoint() { return SDL_FPoint{ (float)this->x, (float)this->y }; }
+
+
 };
 
 template <class T>
@@ -74,10 +76,12 @@ public:
 	inline Size2D(SDL_FPoint point) : w((T)point.x), h((T)point.y) {}
 
 	template <class U>
-	inline Size2D<U> convertTo() { return Size2D<U>((U)this->w, (U)this->h); }
+	inline Size2D<U> convertTo() { return Size2D<U>((U)w, (U)h); }
 
-	inline SDL_Point convertToSDL_Point() { return SDL_Point{ (int)this->w, (int)this->h }; }
-	inline SDL_FPoint convertToSDL_FPoint() { return SDL_FPoint{ (float)this->w, (float)this->h }; }
+	inline SDL_Point convertToSDL_Point() { return SDL_Point{ (int)w, (int)h }; }
+	inline SDL_FPoint convertToSDL_FPoint() { return SDL_FPoint{ (float)w, (float)h }; }
+
+	inline T area() { return w * h; }
 };
 
 template <class T>
@@ -94,6 +98,12 @@ public:
 
 	inline Rect2D(SDL_Rect r) : x((T)r.x), y((T)r.y), w((T)r.w), h((T)r.h) {}
 	inline Rect2D(SDL_FRect r) : x((T)r.x), y((T)r.y), w((T)r.w), h((T)r.h) {}
+
+	template <class U>
+	inline Rect2D<U> convertTo() { return Rect2D<U>((U)x, (U)y, (U)w, (U)h); }
+
+	inline SDL_Rect convertToSDL_Rect() { return SDL_Rect{ (int)x,(int)y,(int)w,(int)h }; }
+	inline SDL_FRect convertToSDL_FRect() { return SDL_FRect{ (float)x,(float)y,(float)w,(float)h }; }
 };
 
 class Color
@@ -105,4 +115,7 @@ public:
 	inline Color(Uint8 r, Uint8 g, Uint8 b): r(r), g(g), b(b), a(255) {}
 	inline Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a) : r(r), g(g), b(b), a(a) {}
 
+	inline Color(SDL_Color color) : r(color.r), g(color.g), b(color.b), a(color.a) {}
+
+	inline SDL_Color convertToSDL_Color() { return SDL_Color{ r, g, b, a }; }
 };

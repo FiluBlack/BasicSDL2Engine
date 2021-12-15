@@ -4,7 +4,7 @@ class Image
 private:
 	SDL_Surface* m_imageSurface;
 	SDL_Texture* m_image;
-	Size2D<int> m_textureSize;
+	Size2D<unsigned int> m_textureSize;
 
 public:
 	SDL_Renderer* renderer; 
@@ -31,7 +31,7 @@ public:
 	void loadImageBySurface(SDL_Surface* surface);
 	void unloadImage();
 
-	inline Size2D<int> getTextureSize() const { return m_textureSize; }
+	inline Size2D<unsigned int> getTextureSize() const { return m_textureSize; }
 
 	void setPosition(int x, int y);
 	void setPosition(Position2D<int> position);
@@ -46,22 +46,8 @@ public:
 
 	void log() { DEBUG(m_imageSurface); DEBUG(m_image); }
 
-	//rendering functions
-
-	/*
-	Renders the scaled Image.
-	*/
 	void render() const;
-	/*
-	Renders a scaled rectangular part of the Image.
-
-	x and y are the upper left coordinates of the rectangle.
-	w and h are width and height of the rectangle.
-	*/
 	void renderPart(int x, int y, unsigned int w, unsigned int h) const;
-	/*
-	Renders a scaled rectangular part of the Image using SDL_Rect.
-	*/
 	void renderPart(SDL_Rect* srcrect) const;
 };
 

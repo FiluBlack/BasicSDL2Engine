@@ -4,7 +4,6 @@
 #include "pch.h"
 
 #include "Image.h"
-#include "Spritesheet.h"
 #include "Essentials.h"
 
 
@@ -18,35 +17,17 @@ int main(int argc, char* args[])
     SDL_SetRenderDrawColor(r1, 0, 0, 255, 255);
     SDL_SetRenderDrawBlendMode(r1, SDL_BLENDMODE_NONE);
     SDL_RenderClear(r1);
-    
-    Spritesheet s1(r1, "resources/images/arrow.png"), s2(r1, "resources/images/arrow2.png");
 
-
-
-    Spritesheet s3(Spritesheet(r1, "resources/images/arrow2.png"));
-    s3.log();
-    s2.log();
-
-
-    //Spritesheet s3(s2);
-
-
-    
-    
-
-    ////SDL_SetRenderDrawColor(r1, 255, 255, 255, 0);
-    //Image i(r1, "arrow2.png", Position2D<int>(200, 300), Size2D<unsigned int>(46, 56));
-    ////i.render(r1);
-    ////i.setPosition(200, 400);
-    //SDL_Rect r2 = { 0, 0, 230, 200 };
-    //Image* i3 = i.getImagePart(r1, &r2);
-    //i3->setPosition(200, 400);
-    //i3->render(r1);
+    SDL_SetRenderDrawColor(r1, 255, 255, 255, 0);
+    Image i(r1, "resources/images/arrow2.png", Position2D<int>(200, 300), Size2D<unsigned int>(46, 56));
+    i.setPosition(200, 400);
+    i.render();
+    SDL_Rect r2 = { 0, 0, 230, 200 };
+    Image i3 = i.getImagePart(&r2);
+    i3.setPosition(0, 0);
+    i3.render();
 
     SDL_RenderPresent(r1);
-
-    //Vector2D<float> f(2.3, 3.2);
-    //Vector2D<int> v = f.convertTo<int>();
 
     std::cin.get();
     IMG_Quit();

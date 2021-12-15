@@ -3,7 +3,7 @@
 #include <iostream>
 
 Image::Image()
-	: renderer(nullptr), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<int>()), 
+	: renderer(nullptr), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<unsigned int>()), 
 	position(Position2D<int>()), size(Size2D<unsigned int>()), alpha(255)
 {
 }
@@ -27,35 +27,35 @@ Image::Image(Image&& other)
 }
 
 Image::Image(SDL_Renderer* renderer, const char* file)
-	: renderer(renderer), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<int>()), 
+	: renderer(renderer), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<unsigned int>()), 
 	position(Position2D<int>()), size(Size2D<unsigned int>()), alpha(255)
 {
 	loadImage(file);
-	this->size = m_textureSize.convertTo<unsigned int>();
+	this->size = m_textureSize;
 }
 
 Image::Image(SDL_Renderer* renderer, const char* file, Position2D<int> position)
-	: renderer(renderer), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<int>()), position(position), size(Size2D<unsigned int>()), alpha(255)
+	: renderer(renderer), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<unsigned int>()), position(position), size(Size2D<unsigned int>()), alpha(255)
 {
 	loadImage(file);
-	this->size = m_textureSize.convertTo<unsigned int>();
+	this->size = m_textureSize;
 }
 
 Image::Image(SDL_Renderer* renderer, const char* file, Position2D<int> position, Uint8 alpha)
-	: renderer(renderer), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<int>()), position(position), size(Size2D<unsigned int>()), alpha(alpha)
+	: renderer(renderer), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<unsigned int>()), position(position), size(Size2D<unsigned int>()), alpha(alpha)
 {
 	loadImage(file);
-	this->size = m_textureSize.convertTo<unsigned int>();
+	this->size = m_textureSize;
 }
 
 Image::Image(SDL_Renderer* renderer, const char* file, Position2D<int> position, Size2D<unsigned int> size)
-	: renderer(renderer), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<int>()), position(position), size(size), alpha(255)
+	: renderer(renderer), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<unsigned int>()), position(position), size(size), alpha(255)
 {
 	loadImage(file);
 }
 
 Image::Image(SDL_Renderer* renderer, const char* file, Position2D<int> position, Size2D<unsigned int> size, Uint8 alpha)
-	: renderer(renderer), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<int>()), position(position), size(size), alpha(alpha)
+	: renderer(renderer), m_imageSurface(nullptr), m_image(nullptr), m_textureSize(Size2D<unsigned int>()), position(position), size(size), alpha(alpha)
 {
 	loadImage(file);
 }
@@ -101,9 +101,15 @@ Image& Image::operator=(Image&& other)
 
 void Image::loadImage(const char* file)
 {
+	int w, h;
+
 	m_imageSurface = IMG_Load(file);
+	if (m_imageSurface == NULL)
+		LOG("Image.loadImage(" << file << "): " << SDL_GetError());
 	m_image = SDL_CreateTextureFromSurface(this->renderer, m_imageSurface);
-	SDL_QueryTexture(m_image, NULL, NULL, &(m_textureSize.w), &(m_textureSize.h));
+	SDL_QueryTexture(m_image, NULL, NULL, &w, &h);
+	m_textureSize.w = w;
+	m_textureSize.h = h;
 }
 
 void Image::loadImageBySurface(SDL_Surface* surface)
@@ -124,7 +130,11 @@ void Image::loadImageBySurface(SDL_Surface* surface)
 
 	m_image = SDL_CreateTextureFromSurface(this->renderer, m_imageSurface);
 
-	SDL_QueryTexture(m_image, NULL, NULL, &(m_textureSize.w), &(m_textureSize.h));
+	int w, h;
+
+	SDL_QueryTexture(m_image, NULL, NULL, &w, &h);
+	m_textureSize.w = w;
+	m_textureSize.h = h;
 }
 
 void Image::unloadImage()
@@ -171,6 +181,10 @@ Image Image::getImagePart(int x, int y, unsigned int w, unsigned int h) const
 
 Image Image::getImagePart(SDL_Rect* srcrect) const
 {
+	if (m_imageSurface == NULL) {
+		LOG("Image.getImagePart(): m_imageSurface is nullptr");
+		return Image();
+	}
 	SDL_Surface* temp_surface = SDL_CreateRGBSurface(
 		0,
 		srcrect->w,
