@@ -179,6 +179,35 @@ Image Image::getImagePart(int x, int y, unsigned int w, unsigned int h) const
 	return this->getImagePart(&srcr);
 }
 
+Image Image::getImagePart(Rect2D<unsigned int> srcrect) const
+{
+	if (m_imageSurface == NULL) {
+		LOG("Image.getImagePart(): m_imageSurface is nullptr");
+		return Image();
+	}
+	SDL_Surface* temp_surface = SDL_CreateRGBSurface(
+		0,
+		srcrect.w,
+		srcrect.h,
+		32,
+		m_imageSurface->format->Rmask,
+		m_imageSurface->format->Gmask,
+		m_imageSurface->format->Bmask,
+		m_imageSurface->format->Amask);
+
+	SDL_Rect r(srcrect.convertToSDL_Rect());
+	if (SDL_BlitSurface(m_imageSurface, &r, temp_surface, NULL) < 0)
+		LOG("Image.getImagePart(): " << SDL_GetError());
+
+	Image temp_image;
+
+	temp_image.renderer = this->renderer;
+	temp_image.loadImageBySurface(temp_surface);
+	temp_image.setSize(Size2D<unsigned int>(srcrect.w, srcrect.h));
+
+	return temp_image;
+}
+
 Image Image::getImagePart(SDL_Rect* srcrect) const
 {
 	if (m_imageSurface == NULL) {
@@ -225,6 +254,22 @@ void Image::renderPart(int x, int y, unsigned int w, unsigned int h) const
 	SDL_Rect srcr{ x, y, w, h };
 
 	this->renderPart(&srcr);
+}
+
+void Image::renderPart(Rect2D<unsigned int> srcrect) const
+{
+	if (m_image == nullptr) return;
+
+	SDL_Rect desr{
+		this->position.x,
+		this->position.y,
+		this->size.w * ((float)srcrect.w / (float)m_textureSize.w),
+		this->size.h * ((float)srcrect.h / (float)m_textureSize.h)
+	};
+
+	SDL_Rect r(srcrect.convertToSDL_Rect());
+	if (SDL_RenderCopy(this->renderer, m_image, &r, &desr) < 0)
+		LOG("Image.renderPart(): " << SDL_GetError());
 }
 
 void Image::renderPart(SDL_Rect* srcrect) const

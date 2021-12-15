@@ -42,12 +42,14 @@ public:
 	void setAlpha(Uint8 alpha);
 
 	Image getImagePart(int x, int y, unsigned int w, unsigned int h) const;
+	Image getImagePart(Rect2D<unsigned int> srcrect) const;
 	Image getImagePart(SDL_Rect* srcrect) const;
 
-	void log() { DEBUG(m_imageSurface); DEBUG(m_image); }
+	inline void log() { DEBUG(m_imageSurface); DEBUG(m_image); }
 
 	void render() const;
 	void renderPart(int x, int y, unsigned int w, unsigned int h) const;
+	void renderPart(Rect2D<unsigned int> srcrect) const;
 	void renderPart(SDL_Rect* srcrect) const;
 };
 
