@@ -1,10 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasicSDL2Engine", "BasicSDL2Engine\BasicSDL2Engine.vcxproj", "{EA9C399B-0D4F-4FDB-B3C8-B2214E9C0238}"
 	ProjectSection(ProjectDependencies) = postProject
+		{D0CBBAD3-67F6-480E-9943-BF6023713ED6} = {D0CBBAD3-67F6-480E-9943-BF6023713ED6}
 		{D8997EE4-8E1D-4423-9445-CB39DA4C4130} = {D8997EE4-8E1D-4423-9445-CB39DA4C4130}
 	EndProjectSection
 EndProject
@@ -19,6 +20,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDLGraphics", "SDLGraphics\
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDLEssentials", "SDLEssentials\SDLEssentials.vcxproj", "{D8997EE4-8E1D-4423-9445-CB39DA4C4130}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestProject", "TestProject\TestProject.vcxproj", "{D0CBBAD3-67F6-480E-9943-BF6023713ED6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{22E75C8A-23AF-4C86-B51A-CEB4F8FC2944} = {22E75C8A-23AF-4C86-B51A-CEB4F8FC2944}
+		{D56F3239-EC81-4854-86F2-8794C254CF8D} = {D56F3239-EC81-4854-86F2-8794C254CF8D}
+		{D8997EE4-8E1D-4423-9445-CB39DA4C4130} = {D8997EE4-8E1D-4423-9445-CB39DA4C4130}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +68,14 @@ Global
 		{D8997EE4-8E1D-4423-9445-CB39DA4C4130}.Release|x64.Build.0 = Release|x64
 		{D8997EE4-8E1D-4423-9445-CB39DA4C4130}.Release|x86.ActiveCfg = Release|Win32
 		{D8997EE4-8E1D-4423-9445-CB39DA4C4130}.Release|x86.Build.0 = Release|Win32
+		{D0CBBAD3-67F6-480E-9943-BF6023713ED6}.Debug|x64.ActiveCfg = Debug|x64
+		{D0CBBAD3-67F6-480E-9943-BF6023713ED6}.Debug|x64.Build.0 = Debug|x64
+		{D0CBBAD3-67F6-480E-9943-BF6023713ED6}.Debug|x86.ActiveCfg = Debug|Win32
+		{D0CBBAD3-67F6-480E-9943-BF6023713ED6}.Debug|x86.Build.0 = Debug|Win32
+		{D0CBBAD3-67F6-480E-9943-BF6023713ED6}.Release|x64.ActiveCfg = Release|x64
+		{D0CBBAD3-67F6-480E-9943-BF6023713ED6}.Release|x64.Build.0 = Release|x64
+		{D0CBBAD3-67F6-480E-9943-BF6023713ED6}.Release|x86.ActiveCfg = Release|Win32
+		{D0CBBAD3-67F6-480E-9943-BF6023713ED6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
